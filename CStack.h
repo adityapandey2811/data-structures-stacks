@@ -103,7 +103,7 @@ int peek(Stack *top){
         printf("Stack not available!!!\n");
     return -1;
 }
-void display(Stack *top){
+void displayStack(Stack *top){
     if(top == NULL){
         printf("Stack Empty!!!\n");
         return;

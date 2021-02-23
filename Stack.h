@@ -1,3 +1,6 @@
+// Stacks Header by Aditya
+#ifndef Stack_h
+#define Stack_h
 #include<stdio.h>
 #include<stdlib.h>
 typedef struct node{
@@ -92,11 +95,26 @@ void display(Stack *top){
         return;
     }
     if(top->next == NULL){
-        printf("%d ",top->data);
+        printf("%c ",top->data);
         return;
     }
     else{
         display(top->next);
-        printf("%d ",top->data);
+        printf("%c ",top->data);
     }
 }
+void originalStructureDisplay(Stack *top, int info){
+    if(!isEmpty(top)){
+        while(top!=NULL){
+            if(info == 1)
+                printf("%d ",top->data);
+            else
+                printf("%c ",top->data);
+            top = top->next;
+        }
+        printf("\n");
+    }
+    else
+        printf("Stack Empty!!!\n");
+}
+#endif

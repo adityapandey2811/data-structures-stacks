@@ -3,7 +3,6 @@
 #include<string.h>
 #include<ctype.h>
 #include"CStack.h"
-void postfix(char*, int);
 void reverse(char arr[]){
     int i = 0, n = 0;
     char x;

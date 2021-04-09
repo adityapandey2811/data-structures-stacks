@@ -49,6 +49,22 @@ int isEmpty(stack *top){
         return 1;
     return 0;
 }
+void pushing(stack **top, char c){
+    char i;
+    stack *temp = *top, *link;
+    if(!isFull()){
+        link = (stack*)malloc(sizeof(stack));
+        link->val = c;
+        if(temp == NULL){
+            *top = link;
+            link->next = NULL;
+        }
+        else{
+            link->next = temp;
+            *top = link;
+        }
+    }
+}
 void push(stack **top){
     char i;
     stack *temp = *top, *link;

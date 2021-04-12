@@ -85,15 +85,16 @@ void push(stack **top){
 }
 char pop(stack **top){
     stack *temp;
-    char i;
+    char c;
     if(top == NULL)
         printf("Stack Empty\n");
     else{
         temp = *top;
+        c = temp->val;
         (*top) = (*top)->next;
         free(temp);
     }
-    return i;
+    return c;
 }
 
 #endif

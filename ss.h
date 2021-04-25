@@ -37,6 +37,16 @@ void display(stack *top){
         top = top->next;
     }
 }
+void displayI(stack *top){
+    if(top == NULL){
+        printf("Stack Empty\n");
+        return;
+    }
+    while(top!=NULL){
+        printf("%d ",top->data);
+        top = top->next;
+    }
+}
 int isFull(){
     stack *check;
     check = (stack*)malloc(sizeof(stack));
@@ -50,11 +60,25 @@ int isEmpty(stack *top){
     return 0;
 }
 void pushing(stack **top, char c){
-    char i;
     stack *temp = *top, *link;
     if(!isFull()){
         link = (stack*)malloc(sizeof(stack));
         link->val = c;
+        if(temp == NULL){
+            *top = link;
+            link->next = NULL;
+        }
+        else{
+            link->next = temp;
+            *top = link;
+        }
+    }
+}
+void pushI(stack **top, int c){
+    stack *temp = *top, *link;
+    if(!isFull()){
+        link = (stack*)malloc(sizeof(stack));
+        link->data = c;
         if(temp == NULL){
             *top = link;
             link->next = NULL;
@@ -95,6 +119,7 @@ char pop(stack **top){
         free(temp);
     }
     return c;
+    
 }
 
 #endif

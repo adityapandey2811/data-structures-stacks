@@ -11,7 +11,7 @@ int main(){
         span[i] = 1;
         j=i-1;
         while(j!=-1){
-            if(arr[i]>arr[j]){
+            if(arr[i]>=arr[j]){
                 span[i]++;
             }
             else{

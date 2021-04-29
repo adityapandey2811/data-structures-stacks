@@ -119,7 +119,19 @@ char pop(stack **top){
         free(temp);
     }
     return c;
-    
+}
+int popI(stack **top){
+    stack *temp;
+    int c;
+    if(top == NULL)
+        printf("Stack Empty\n");
+    else{
+        temp = *top;
+        c = temp->data;
+        (*top) = (*top)->next;
+        free(temp);
+    }
+    return c;
 }
 
 #endif

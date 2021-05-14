@@ -27,6 +27,12 @@ void deleteStack(stack **top){
     }
     *top = NULL;
 }
+void displaying(stack *top){
+    if(top->next!=NULL){
+        displaying(top->next);
+    }
+    printf("%c ",top->val);
+}
 void display(stack *top){
     if(top == NULL){
         printf("Stack Empty\n");

@@ -1,120 +1,143 @@
-// Stacks Header by Aditya
 #ifndef Stack_h
 #define Stack_h
+
 #include<stdio.h>
 #include<stdlib.h>
 typedef struct node{
     int data;
+    char val;
     struct node *next;
-}Stack;
-int isEmpty(Stack *top){
+}stack;
+int top(stack *top){
+    if(top == NULL)
+        printf("Stack Empty\n");
+    else
+        while(top->next != NULL)
+            top = top->next;
+    return top->val;
+}
+void deleteStack(stack **top){
+    stack *temp ,*link = *top;
+    if(*top == NULL)
+        printf("Stack Empty\n");
+    while(link!=NULL){
+        temp = link;
+        link = link->next;
+        free(temp);
+    }
+    *top = NULL;
+}
+void displayings(stack *top){
+    if(top->next!=NULL){
+        displayings(top->next);
+    }
+    printf("%c ",top->val);
+}
+void display(stack *top){
+    if(top == NULL){
+        printf("Stack Empty\n");
+        return;
+    }
+    while(top!=NULL){
+        printf("%c ",top->val);
+        top = top->next;
+    }
+}
+void displayIs(stack *top){
+    if(top == NULL){
+        printf("Stack Empty\n");
+        return;
+    }
+    while(top!=NULL){
+        printf("%d ",top->data);
+        top = top->next;
+    }
+}
+int isFulls(){
+    stack *check;
+    check = (stack*)malloc(sizeof(stack));
+    if(check == NULL)
+        return 1;
+    return 0;
+}
+int isEmptys(stack *top){
     if(top == NULL)
         return 1;
     return 0;
 }
-int isFull(Stack *top){
-    Stack *s = NULL;
-    s = (Stack*)malloc(sizeof(Stack));
-    if(s == NULL)
-        return 1;
-    return 0;
-}
-Stack* deleteStack(Stack *top){
-    Stack *s = NULL;
-    if(!isEmpty(top)){
-        while(top!=NULL){
-            s = top;
-            top = top->next;
-            free(s);
-        }
-        return top;
-    }
-    else{
-        printf("Stack not available!!!\n");
-        return NULL;
-    }
-}
-Stack* push(Stack *top){
-    Stack *s = NULL;
-    if(!isFull(top)){
-        s = (Stack*)malloc(sizeof(Stack));
-        printf("Enter Data: ");
-        scanf("%d",&s->data);
-        s->next = top;
-        top = s;
-        printf("Pushed: %d\n",s->data);
-    }
-    else
-        printf("Memory Not Available!!!\n");
-    return top;
-}
-Stack* pop(Stack *top){
-    Stack *s = top;
-    if(!isEmpty(top)){
-        top = top->next;
-        printf("Popped: %d\n",s->data);
-        free(s);
-    }
-    else
-        printf("Stack Empty!!!\n");
-    return top;
-}
-int peek(Stack *top){
-    Stack *s = top;
-    int k;
-    if(!isEmpty(top)){
-        printf("Enter k: ");
-        scanf("%d",&k);
-        if(k<=0){
-            printf("Backchodi matt kro beta!!!\n");
-            return -1;
-        }
-        while(--k && s->next != NULL){
-            s = s->next;
-        }
-        while(s->next != NULL){
-            s = s->next;
-            top = top->next;
-        }
-        if(k != 0){
-            printf("Invalid index!!!\n");
-            return -1;
+void pushing(stack **top, char c){
+    stack *temp = *top, *link;
+    if(!isFulls()){
+        link = (stack*)malloc(sizeof(stack));
+        link->val = c;
+        if(temp == NULL){
+            *top = link;
+            link->next = NULL;
         }
         else{
-            printf("Peeked: %d\n",top->data);
-            return top->data;
+            link->next = temp;
+            *top = link;
         }
     }
-    else
-        printf("Stack not available!!!\n");
-    return -1;
 }
-void display(Stack *top){
-    if(top == NULL){
-        printf("Stack Empty!!!\n");
-        return;
+void pushI(stack **top, int c){
+    stack *temp = *top, *link;
+    if(!isFulls()){
+        link = (stack*)malloc(sizeof(stack));
+        link->data = c;
+        if(temp == NULL){
+            *top = link;
+            link->next = NULL;
+        }
+        else{
+            link->next = temp;
+            *top = link;
+        }
     }
-    if(top->next == NULL){
-        printf("%c ",top->data);
-        return;
+}
+void push(stack **top){
+    char i;
+    stack *temp = *top, *link;
+    if(!isFulls()){
+        link = (stack*)malloc(sizeof(stack));
+        printf("Enter Data: ");
+        fflush(stdin);
+        scanf("%c",&link->val);
+        if(temp == NULL){
+            *top = link;
+            link->next = NULL;
+        }
+        else{
+            link->next = temp;
+            *top = link;
+        }
     }
+}
+char pop(stack **top){
+    stack *temp;
+    char c;
+    if(top == NULL)
+        printf("Stack Empty\n");
     else{
-        display(top->next);
-        printf("%c ",top->data);
+        temp = *top;
+        c = temp->val;
+        (*top) = (*top)->next;
+        free(temp);
     }
+    return c;
 }
-void originalStructureDisplay(Stack *top, int info){
-    if(!isEmpty(top)){
-        while(top!=NULL){
-            if(info == 1)
-                printf("%d ",top->data);
-            else
-                printf("%c ",top->data);
-            top = top->next;
-        }
-        printf("\n");
+int popI(stack **top){
+    stack *temp;
+    int c;
+    if(top == NULL)
+        printf("Stack Empty\n");
+    else{
+        temp = *top;
+        c = temp->data;
+        (*top) = (*top)->next;
+        free(temp);
     }
-    else
-        printf("Stack Empty!!!\n");
+    return c;
 }
+
 #endif
